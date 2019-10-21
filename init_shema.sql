@@ -49,6 +49,16 @@ comment 'Table of subjects';
 create unique index subjects_subj_name_uindex
 	on subjects (subj_name);
 
+create table activity 
+(
+	activity_id int auto_increment,
+	subject_id int not null,
+	teacher_id int not null,
+	group_id int not null,
+	constraint activity_pk
+		primary key (activity_id)
+)	
+	
 alter table ooad.activity add unique (subject_id, teacher_id, group_id);
 
 alter table activity
