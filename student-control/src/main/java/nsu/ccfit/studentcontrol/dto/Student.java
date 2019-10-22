@@ -17,7 +17,7 @@ public class Student implements Serializable {
     private final int id;
 
     @NotNull
-    @Pattern(regexp = "(\\w| |\\.)*\\n", message = "Student name must consist only words, spaces or dots")
-    @Size(min = 1, max = 50, message = "Student name must consist from 1 to 50 characters")
+    @Pattern(regexp = "^\\w(\\w| |\\.)*$", message = "Student name must only contain words, spaces or dots")
+    @Size(min = 1, max = 50, message = "Student name must contain from 1 to 50 characters")
     private final String name;
 }
