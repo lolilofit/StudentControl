@@ -14,7 +14,7 @@ create unique index groups_num_uindex
 alter table `groups`
 	add constraint groups_pk
 		primary key (id);
-		
+
 create table students
 (
 	stud_id int null,

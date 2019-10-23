@@ -1,6 +1,10 @@
 package nsu.ccfit.studentcontrol.dto;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -9,6 +13,8 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Data
+@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PACKAGE, force = true)
 @Entity
 @Table(name = "students", schema = "ooad")
 public class Student implements Serializable {
@@ -20,4 +26,10 @@ public class Student implements Serializable {
     @Pattern(regexp = "^\\w(\\w| |\\.)*$", message = "Student name must only contain words, spaces or dots")
     @Size(min = 1, max = 50, message = "Student name must contain from 1 to 50 characters")
     private final String name;
+
+    @JsonManagedReference
+    @Column(name = "group", nullable = false)
+    @JoinColumn(name = "group", referencedColumnName = "id", table = "groups")
+    @NotNull
+    private int group;
 }
