@@ -1,16 +1,18 @@
 package nsu.ccfit.studentcontrol.dto;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Time;
 
 @Data
+@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PACKAGE, force = true)
 @Entity
 @Table(name = "timetable", schema = "ooad")
 public class Class implements Serializable {
@@ -22,8 +24,9 @@ public class Class implements Serializable {
     @Column(name = "id", unique = true)
     private final int id;
 
-    @Column(name = "activityId", nullable = false)
+    @Column(name = "activity_id", nullable = false)
     @NotNull(message = "Activity id must be specified")
+    @JoinColumn(name = "activity_id", referencedColumnName = "activity_id", table = "activity")
     private final int activityId;
 
     @Column(name = "start_time", nullable = false)

@@ -1,6 +1,9 @@
 package nsu.ccfit.studentcontrol.dto;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -9,6 +12,8 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Data
+@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PACKAGE, force = true)
 @Entity
 @Table(name = "teachers", schema = "ooad")
 public class Teacher implements Serializable {
