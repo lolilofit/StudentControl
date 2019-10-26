@@ -10,7 +10,7 @@ class StudentData:
         self.group = group
         self.student_id = student_id
     
-
+import json
 import requests
 import re
 from bs4 import BeautifulSoup 
@@ -38,8 +38,8 @@ def pars(text):
             count = count + 1
         group_number = group_number + 1
     
-    for e in _list:
-        print(e.name, e.group, e.student_id)    
+    
+    print(json.dumps(_list))    
      
 
 def main():
@@ -47,7 +47,6 @@ def main():
     str_url = "http://fit.nsu.ru/uch/22-uch/1501-spiski-grupp-3-kurs"
     text = get_html(str_url)
     pars(text)
-  #  print(text)
     
     
 if __name__ == '__main__':
