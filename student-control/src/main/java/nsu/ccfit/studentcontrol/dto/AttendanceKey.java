@@ -11,6 +11,6 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PACKAGE, force = true)
 public class AttendanceKey implements Serializable {
-    private final int stud_id;
-    private final int lesson_id;
+    private final int studId;
+    private final int lessonId;
 }
