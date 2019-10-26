@@ -32,7 +32,7 @@ public class StudentRestController {
         return maybeStudent.map(student -> new ResponseEntity<>(student, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping(path = "/")
+    @PostMapping(path = "/", consumes = "application/json")
     public Student saveStudent(@RequestBody @Valid Student student) {
         return repository.save(student);
     }
