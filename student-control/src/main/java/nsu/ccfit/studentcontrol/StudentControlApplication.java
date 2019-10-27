@@ -13,5 +13,4 @@ public class StudentControlApplication {
 
 		SpringApplication.run(StudentControlApplication.class, args);
 	}
-
 }
