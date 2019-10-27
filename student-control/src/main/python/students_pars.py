@@ -24,7 +24,8 @@ def pars(text):
     count = 0
     group_number = 0
     
-    soup = BeautifulSoup(text, 'lxml')
+    #soup = BeautifulSoup(text, 'lxml')
+    soup = BeautifulSoup(text, 'html.parser')
     item = soup.find('div', class_="item-page")
     
     all_groups = item.find_all('ol')
@@ -34,13 +35,14 @@ def pars(text):
         members = group.find_all('li')
         for student in members:
             st = StudentData(student.text.strip(), group_name, count)
-            _list.append(st)
+            #print(st.group, st.name)     
+            _list.append(json.dumps(st.__dict__, ensure_ascii=False))
             count = count + 1
         group_number = group_number + 1
-    
-    
-    print(json.dumps(_list))    
      
+    #ser_list = json.dumps(_list)
+    #r = requests.post('http://localhost/api/data/students', data = ser_list)
+    print(json.dumps(_list, ensure_ascii=False))
 
 def main():
     #change
