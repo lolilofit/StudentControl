@@ -5,11 +5,15 @@ import { AppComponent } from './app.component';
 import { StudentsService } from './services/students.service';
 import { HttpClientModule } from '@angular/common/http';
 import { StudentComponent } from './components/student/student.component';
+import { GroupComponent } from './components/group/group.component';
+import { GroupContainerComponent } from './components/group-container/group-container.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StudentComponent
+    StudentComponent,
+    GroupComponent,
+    GroupContainerComponent
   ],
   imports: [
     BrowserModule,
