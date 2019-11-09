@@ -7,9 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class StudentControlApplication {
 
+
 	public static void main(String[] args) {
-		StudentsDataCatcher catcher = new StudentsDataCatcher();
-		catcher.callPython();
 
 		SpringApplication.run(StudentControlApplication.class, args);
 	}

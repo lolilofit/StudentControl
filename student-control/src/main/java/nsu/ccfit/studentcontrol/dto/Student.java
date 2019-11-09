@@ -1,5 +1,6 @@
 package nsu.ccfit.studentcontrol.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -27,7 +28,7 @@ public class Student implements Serializable {
     @Size(min = 1, max = 50, message = "Student name must contain from 1 to 50 characters")
     private final String name;
 
-    @JsonManagedReference
+    @JsonBackReference
     @Column(name = "group", nullable = false)
     @JoinColumn(name = "group", referencedColumnName = "id", table = "groups")
     @NotNull

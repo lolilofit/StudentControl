@@ -2,6 +2,7 @@ package nsu.ccfit.studentcontrol.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,7 +29,7 @@ public class Group implements Serializable {
     private final int groupNum;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonBackReference
+    @JsonManagedReference
     @OneToMany(mappedBy = "group")
     @Transient
     private List<Student> groupStudents;
