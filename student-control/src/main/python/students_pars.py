@@ -5,10 +5,10 @@ Created on Tue Oct 22 14:14:07 2019
 @author: User
 """
 class StudentData:
-    def __init__(self, name, group, student_id):
+    def __init__(self, id, name, group):
         self.name = name
         self.group = group
-        self.student_id = student_id
+        self.id = id
     
 import json
 import requests
@@ -30,11 +30,25 @@ def pars(text):
     
     all_groups = item.find_all('ol')
     all_groups_names = item.find_all('strong')
+    found = []
+    count = 0
+    
+    for el in all_groups_names:
+        if(el.text.strip() == ''):
+            found.append(count)
+        count = count + 1
+    if(found.count != 0):
+        found.reverse();
+        for ind in found:
+            all_groups_names.pop(ind)
+        
     for group in all_groups:
         group_name = re.sub(r"[^0-9]+", "", all_groups_names[group_number].text.strip())
+        #if(group_name != ''):   
+        group_num = int(group_name)
         members = group.find_all('li')
         for student in members:
-            st = StudentData(student.text.strip(), group_name, count)
+            st = StudentData(count, student.text.strip(), group_num)
             #print(st.group, st.name)     
             _list.append(json.dumps(st.__dict__, ensure_ascii=False))
             count = count + 1
