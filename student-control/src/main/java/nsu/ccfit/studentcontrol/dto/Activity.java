@@ -13,7 +13,7 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PACKAGE, force = true)
 @Entity
-@Table(name = "activity", schema = "ooad")
+@Table(name = "activity", schema = "C##OOAD")
 public class Activity implements Serializable {
     @Id
     @Column(name = "activity_id", unique = true)

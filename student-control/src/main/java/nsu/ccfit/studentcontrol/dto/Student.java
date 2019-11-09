@@ -1,6 +1,6 @@
 package nsu.ccfit.studentcontrol.dto;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,20 +16,19 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PACKAGE, force = true)
 @Entity
-@Table(name = "students", schema = "ooad")
+@Table(name = "students", schema = "C##OOAD")
 public class Student implements Serializable {
     @Id
     @Column(name = "stud_id", unique = true)
     private final int id;
 
     @NotNull
-    @Pattern(regexp = "^\\w(\\w| |\\.)*$", message = "Student name must only contain words, spaces or dots")
+    @Pattern(regexp = "^[А-Яа-я]([А-Яа-я]| |\\.)*$", message = "Student name must only contain words, spaces or dots")
     @Size(min = 1, max = 50, message = "Student name must contain from 1 to 50 characters")
     private final String name;
 
-    @JsonManagedReference
-    @Column(name = "group", nullable = false)
-    @JoinColumn(name = "group", referencedColumnName = "id", table = "groups")
+    @Column(name = "group_id", nullable = false)
+    @JoinColumn(name = "group_id", referencedColumnName = "id", table = "groups")
     @NotNull
     private int group;
 }

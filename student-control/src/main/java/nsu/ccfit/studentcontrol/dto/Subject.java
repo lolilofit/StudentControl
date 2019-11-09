@@ -14,7 +14,7 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PACKAGE, force = true)
 @Entity
-@Table(name = "subjects", schema = "ooad")
+@Table(name = "subjects", schema = "C##OOAD")
 public class Subject implements Serializable {
     @Id
     @Column(name = "subj_id", unique = true)
