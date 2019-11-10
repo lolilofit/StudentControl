@@ -14,7 +14,7 @@ import java.sql.Time;
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PACKAGE, force = true)
 @Entity
-@Table(name = "timetable", schema = "ooad")
+@Table(name = "timetable", schema = "C##OOAD")
 public class Class implements Serializable {
     public enum Days {
         SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY

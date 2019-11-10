@@ -15,7 +15,7 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PACKAGE, force = true)
 @Entity
-@Table(name = "teachers", schema = "ooad")
+@Table(name = "teachers", schema = "C##OOAD")
 public class Teacher implements Serializable {
     @Id
     @Column(name = "teach_id", unique = true)
@@ -23,7 +23,7 @@ public class Teacher implements Serializable {
     private final int id;
 
     @NotNull
-    @Pattern(regexp = "^\\w(\\w| |\\.)*$", message = "Name must only contain words and dots")
+    @Pattern(regexp = "^[А-Яа-я]([А-Яа-я]| |\\.)*$", message = "Name must only contain words and dots")
     @Size(min = 1, max = 50, message = "Teacher name must contain from 1 to 50 characters")
     private final String name;
 }

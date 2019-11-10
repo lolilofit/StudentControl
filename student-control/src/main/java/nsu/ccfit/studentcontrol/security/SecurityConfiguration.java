@@ -9,10 +9,14 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.
-//                httpBasic().disable()
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER);
-//    }
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.
+                httpBasic().disable().
+
+                sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER).
+                and().
+                authorizeRequests()
+                    .anyRequest().permitAll();
+    }
 }

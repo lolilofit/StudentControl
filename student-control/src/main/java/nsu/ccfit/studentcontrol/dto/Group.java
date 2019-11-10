@@ -1,7 +1,5 @@
 package nsu.ccfit.studentcontrol.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -17,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PACKAGE, force = true)
 @Entity
-@Table(name = "groups", schema = "ooad")
+@Table(name = "groups", schema = "C##OOAD")
 public class Group implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,9 +26,6 @@ public class Group implements Serializable {
     @Column(name = "num", unique = true)
     private final int groupNum;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonManagedReference
-    @OneToMany(mappedBy = "group")
-    @Transient
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     private List<Student> groupStudents;
 }

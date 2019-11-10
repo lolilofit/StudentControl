@@ -13,7 +13,7 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PACKAGE, force = true)
 @Entity
-@Table(name = "attendance", schema = "ooad")
+@Table(name = "attendance", schema = "C##OOAD")
 @IdClass(AttendanceKey.class)
 public class Attendance implements Serializable {
     public enum Status {
