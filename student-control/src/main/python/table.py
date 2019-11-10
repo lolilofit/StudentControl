@@ -39,12 +39,37 @@ def pars(text):
                     print(week.text)
                 print("*********")
         print('-----------')        
+
+
+def pars_group_url(base, facultet, text):
+    soup = BeautifulSoup(text, 'html.parser')
+    groups = soup.find('table', class_='degree_groups').find_all('tr')
+   
+    for line in groups:
+        l = line.find_all('td')
+        for group in l[1:]:
+            link = group.find('a', class_='group')
+            url = base + link.get('href')
+            name = link.text
+            
         
+
+def get_facultets_urls(base, text):
+    soup = BeautifulSoup(text, 'html.parser')
+    facultet_container = soup.find_all('div', class_='item-faculty')
+    for item in facultet_container:
+        ref_container = item.find('a', class_='faculty')
+        name = ref_container.text
+        url = base + ref_container.get('href')
+        pars_group_url(base, name, get_html(url))
+
+
 def main():
     #change
-    str_url = "https://table.nsu.ru/group/17206"
-    text = get_html(str_url)
-    pars(text)
+    str_url = "https://table.nsu.ru/faculties"
+    get_facultets_urls("https://table.nsu.ru", get_html(str_url))
+    #text = get_html(str_url)
+    #pars(text)
     
     
 if __name__ == '__main__':
