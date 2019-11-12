@@ -4,12 +4,12 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { UtilsService } from './utils.service';
 
-const url = 'localhost:8080/api/student';
+const url = 'http://localhost:8080/api/student/';
 
 export interface Student {
+  id: number;
   name: string;
   group: number;
-  id: number;
 }
 
 @Injectable({

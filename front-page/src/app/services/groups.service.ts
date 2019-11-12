@@ -3,12 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { UtilsService } from './utils.service';
+import { Student } from './students.service';
 
-const url = 'localhost:8080/api/group';
+const url = 'http://localhost:8080/api/group/';
 
 export interface Group {
   id: number;
   groupNum: number;
+  groupStudents: Array<Student>;
 }
 
 @Injectable({
