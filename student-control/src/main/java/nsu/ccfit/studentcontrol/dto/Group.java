@@ -1,6 +1,5 @@
 package nsu.ccfit.studentcontrol.dto;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +25,6 @@ public class Group implements Serializable {
     @Column(name = "num", unique = true)
     private final int groupNum;
 
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Student> groupStudents;
 }

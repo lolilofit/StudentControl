@@ -1,5 +1,6 @@
 package nsu.ccfit.studentcontrol.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -11,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @RequiredArgsConstructor
@@ -31,4 +33,8 @@ public class Student implements Serializable {
     @JoinColumn(name = "group_id", referencedColumnName = "id", table = "groups")
     @NotNull
     private int group;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "studId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Attendance> attendanceList;
 }

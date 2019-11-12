@@ -39,5 +39,6 @@ public class Class implements Serializable {
 
     @Column(name = "day", nullable = false)
     @NotNull(message = "Day of the week must be specified")
+    @Enumerated(EnumType.STRING)
     private final Days day;
 }

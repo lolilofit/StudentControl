@@ -34,5 +34,6 @@ public class Attendance implements Serializable {
 
     @Column(name = "status", nullable = false)
     @NotNull(message = "Status must be specified")
+    @Enumerated(EnumType.STRING)
     private final Status status;
 }
