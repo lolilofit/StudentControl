@@ -56,7 +56,7 @@ def pars(text):
      
     #ser_list = json.dumps(_list)
     #r = requests.post('http://localhost/api/data/students', data = ser_list)
-    print(json.dumps(_list, ensure_ascii=False))
+    print(json.dumps(_list, ensure_ascii=False).replace('"{', '{').replace('}"', '}').replace('\\', ''))
 
 def main():
     #change
