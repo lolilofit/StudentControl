@@ -22,7 +22,9 @@ def main():
     familiar_faces = [
             face_encoding,
             ]
-    
+    familiar_names = [
+            "Darya"
+            ]
     i = 0
     while True:
         ret, frame = capture.read()
@@ -30,12 +32,14 @@ def main():
         face_locations = face_recognition.face_locations(rgb_frame)
         face_encodings = face_recognition.face_encodings(rgb_frame, face_locations)
         for face_encoding in face_encodings:
-            match = face_recognition.compare_faces(familiar_faces, face_encoding, tolerance=0.50)
+            match = face_recognition.compare_faces(familiar_faces, face_encoding, tolerance=0.70)
             name = None
-            if match[0]:
-                name = "me"
+            
+            for pos in range(len(familiar_names)) :
+                if match[pos]:
+                    name = familiar_names[pos]
             face_names.append(name)
-        #remove
+        
             print(name)
             for (top, right, bottom, left), name in zip(face_locations, face_names):
                 #if not name:
