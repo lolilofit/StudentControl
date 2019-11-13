@@ -54,9 +54,9 @@ def pars(text):
             count = count + 1
         group_number = group_number + 1
      
-    #ser_list = json.dumps(_list)
-    #r = requests.post('http://localhost/api/data/students', data = ser_list)
-    print(json.dumps(_list, ensure_ascii=False))
+    ser_list = json.dumps(_list, ensure_ascii=False).replace('"{', '{').replace('}"', '}').replace('\\', '')
+    r = requests.post('http://localhost/api/data/students', data = ser_list)
+    #print(json.dumps(_list, ensure_ascii=False).replace('"{', '{').replace('}"', '}').replace('\\', ''))
 
 def main():
     #change
