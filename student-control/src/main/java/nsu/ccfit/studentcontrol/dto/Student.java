@@ -1,7 +1,6 @@
 package nsu.ccfit.studentcontrol.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,14 +24,14 @@ public class Student implements Serializable {
     private final int id;
 
     @NotNull
-    @Pattern(regexp = "^[А-Яа-я]([А-Яа-я]| |\\.)*$", message = "Student name must only contain words, spaces or dots")
+    @Pattern(regexp = "^[А-Яа-яё]([А-Яа-яё]| |\\.)*", message = "Student name must only contain words, spaces or dots")
     @Size(min = 1, max = 50, message = "Student name must contain from 1 to 50 characters")
     private final String name;
 
     @Column(name = "group_id", nullable = false)
-    @JoinColumn(name = "group_id", referencedColumnName = "id", table = "groups")
+    @JoinColumn(name = "group_id", referencedColumnName = "num", table = "groups")
     @NotNull
-    private int group;
+    private String group;
 
     @JsonIgnore
     @OneToMany(mappedBy = "studId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

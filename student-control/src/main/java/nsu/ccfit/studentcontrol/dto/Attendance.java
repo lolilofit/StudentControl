@@ -29,7 +29,7 @@ public class Attendance implements Serializable {
     @Id
     @Column(name = "lesson_id", nullable = false)
     @NotNull(message = "Lesson id must be specified")
-    @JoinColumn(name = "lesson_id", referencedColumnName = "id", table = "timetable")
+    @JoinColumn(name = "lesson_id", referencedColumnName = "activity_id", table = "activity")
     private final int lessonId;
 
     @Column(name = "status", nullable = false)

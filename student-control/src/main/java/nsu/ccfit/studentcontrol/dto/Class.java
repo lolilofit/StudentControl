@@ -29,13 +29,10 @@ public class Class implements Serializable {
     @JoinColumn(name = "activity_id", referencedColumnName = "activity_id", table = "activity")
     private final int activityId;
 
-    @Column(name = "start_time", nullable = false)
-    @NotNull(message = "Start time needs to be specified")
-    private final Time start;
-
-    @Column(name = "end_time", nullable = false)
-    @NotNull(message = "End time needs to be specified")
-    private final Time end;
+    @Column(name = "period_id", nullable = false)
+    @NotNull(message = "Period id must be specified")
+    @JoinColumn(name = "period_id", referencedColumnName = "period_id", table = "period")
+    private final int periodId;
 
     @Column(name = "day", nullable = false)
     @NotNull(message = "Day of the week must be specified")
