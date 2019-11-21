@@ -7,6 +7,7 @@ Created on Tue Nov 12 13:33:09 2019
 
 import cv2 as cv
 import face_recognition
+import os
 
 def main():
     capture = cv.VideoCapture(0)
@@ -16,6 +17,9 @@ def main():
     face_names = []
     number = 0
 
+    files_list = os.listdir("examples/")
+    for file in files_list:
+        
     image = face_recognition.load_image_file("examples/Усова_Дарья_Сергеевна.jpg")
     face_encoding = face_recognition.face_encodings(image)[0]
     
@@ -25,6 +29,7 @@ def main():
     familiar_names = [
             "Darya"
             ]
+    
     i = 0
     while True:
         ret, frame = capture.read()
