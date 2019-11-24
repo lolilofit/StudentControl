@@ -1,6 +1,6 @@
 **Для работы скриптов необходимо установить:**
 
-*Питон версии 3.7 (Например, дистрибутив анаконда https://www.anaconda.com/distribution/)*
+*Python 3.7 (Например, дистрибутив анаконда https://www.anaconda.com/distribution/)*
 
 *beutiful soup*
 
