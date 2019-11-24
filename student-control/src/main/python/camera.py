@@ -17,8 +17,8 @@ def main():
     face_names = []
     number = 0
 
-    files_list = os.listdir("examples/")
-    for file in files_list:
+    #files_list = os.listdir("examples/")
+   # for file in files_list:
         
     image = face_recognition.load_image_file("examples/Усова_Дарья_Сергеевна.jpg")
     face_encoding = face_recognition.face_encodings(image)[0]
