@@ -4,22 +4,22 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { UtilsService } from './utils.service';
 
-const url = 'localhost:8080/api/student';
+const url = 'localhost:8080/api/group';
 
-export interface Student {
-  name: string;
-  group: number;
+export interface Group {
   id: number;
+  groupNum: number;
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class StudentsService {
+export class GroupsService {
+
   constructor(private http: HttpClient) { }
 
-  load(): Observable<Array<Student>> {
-    return this.http.get<Array<Student>>(url, UtilsService.headers).pipe(
+  load(): Observable<Array<Group>> {
+    return this.http.get<Array<Group>>(url, UtilsService.headers).pipe(
       catchError(UtilsService.handleError)
     );
   }
