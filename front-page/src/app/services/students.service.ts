@@ -9,7 +9,7 @@ const url = 'http://localhost:8080/api/student/';
 export interface Student {
   id: number;
   name: string;
-  group: number;
+  group: string;
 }
 
 @Injectable({
