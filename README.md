@@ -4,7 +4,7 @@
 
 *beutiful soup*
 
-*dlib (для установки должен быть cmake, pip install dlib)*
+*cmake, понадобится в процессе установки face_recognition*
 
 *open_cv (pip install opencv-python)*
 
