@@ -35,7 +35,6 @@ public class StudentsDataCatcher {
 
             System.out.println("Here is the standard output of the command:\n");
             while ((s = stdInput.readLine()) != null) {
-                //System.out.println(s);
                 total.append(s);
             }
             students = mapper.readValue(total.toString(), new TypeReference<List<Student>>() {});
