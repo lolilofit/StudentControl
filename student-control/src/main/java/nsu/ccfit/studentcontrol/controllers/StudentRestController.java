@@ -57,7 +57,9 @@ public class StudentRestController {
         Activity currentActivity = activityRepository.findById(id).orElse(null);
         if (currentActivity == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        int groupId = currentActivity.getGroupId();
+        //fix it
+        //int groupId = currentActivity.getGroupId();
+        int groupId = 0;
         Group currentGroup = groupRepository.findById(groupId).orElse(null);
         if (currentGroup == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
