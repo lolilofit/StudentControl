@@ -4,6 +4,7 @@ import nsu.ccfit.studentcontrol.dto.*;
 import nsu.ccfit.studentcontrol.dto.Class;
 import nsu.ccfit.studentcontrol.repos.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -18,15 +19,20 @@ public class DataRestController {
     private final GroupRepository groupRepository;
     private final SubjectsRepository subjectsRepository;
     private final TeacherRepository teacherRepository;
+    private final ActivityRepository activityRepository;
+    private final ClassesRepository classesRepository;
 
     @Autowired
-    public DataRestController(StudentRepository studentRepository, GroupRepository groupRepository, SubjectsRepository subjectsRepository, TeacherRepository teacherRepository) {
+    public DataRestController(StudentRepository studentRepository, GroupRepository groupRepository, SubjectsRepository subjectsRepository, TeacherRepository teacherRepository, ActivityRepository activityRepository, ClassesRepository classesRepository) {
         this.studentRepository = studentRepository;
         this.groupRepository = groupRepository;
         this.subjectsRepository = subjectsRepository;
         this.teacherRepository = teacherRepository;
+        this.activityRepository = activityRepository;
+        this.classesRepository = classesRepository;
     }
 
+    @Transactional
     @PostMapping(path = "/students")
     public void postStudents(@RequestBody @Valid List<Student> students) {
         List<Group> groups = groupRepository.findAll();
@@ -38,23 +44,62 @@ public class DataRestController {
             studentRepository.save(student);
         }
     }
-//
-//    @PostMapping(path = "/timetable")
-//    public void postTimetable(@RequestBody @Valid Map<String, Map<Class.Days, TimetableScriptAdapter>> data) {
-//        List<Subject> subjects = subjectsRepository.findAll();
-//        List<Teacher> teachers = teacherRepository.findAll();
-//        List<Group> groups = groupRepository.findAll();
-//        data.forEach((group_num, group_table) -> {
-//            if (!groups.contains(new Group(group_num))) {
-//                groupRepository.save(new Group(group_num));
-//                groups.add(new Group(group_num));
-//            }
-//            group_table.forEach((days, timetableScriptAdapter) -> {
-//
-//                Subject subject = new Subject();
-//                subject.setName(timetableScriptAdapter.getSubject());
-//                if (!subjects.contains
-//            });
-//        });
-//    }
+
+    @Transactional
+    @PostMapping(path = "/timetable")
+    public void postTimetable(@RequestBody @Valid Map<String, Map<Class.Days, Map<Integer, TimetableScriptAdapter>>> data) {
+        List<Subject> subjects = subjectsRepository.findAll();
+        List<Teacher> teachers = teacherRepository.findAll();
+        List<Group> groups = groupRepository.findAll();
+        List<Activity> activities = activityRepository.findAll();
+
+        data.forEach((groupNum, groupTable) -> {
+            Group group = new Group(groupNum);
+            if (!groups.contains(group)) {
+                group = groupRepository.save(new Group(groupNum));
+                groups.add(group);
+            } else {
+                int groupInd = groups.indexOf(group);
+                group = groups.get(groupInd);
+            }
+
+            Group finalGroup = group;
+            groupTable.forEach((day, groupDayList) -> {
+                groupDayList.forEach((lessonNum, timetableScriptAdapter) -> {
+                    if (timetableScriptAdapter.getTeacher().equals("НЕТ"))
+                        return;
+
+                    Subject subject = new Subject(null, timetableScriptAdapter.getSubject());
+                    if (!subjects.contains(subject)) {
+                        subject = subjectsRepository.save(subject);
+                        subjects.add(subject);
+                    } else {
+                        int subjectInd = subjects.indexOf(subject);
+                        subject = subjects.get(subjectInd);
+                    }
+
+                    Teacher teacher = new Teacher(null, timetableScriptAdapter.getTeacher());
+                    if (!teachers.contains(teacher)) {
+                        teacher = teacherRepository.save(teacher);
+                        teachers.add(teacher);
+                    } else {
+                        int teacherInd = teachers.indexOf(teacher);
+                        teacher = teachers.get(teacherInd);
+                    }
+
+                    Activity activity = new Activity(null, teacher.getId(), subject.getId(), finalGroup.getGroupNum());
+                    if (!activities.contains(activity)) {
+                        activity = activityRepository.save(activity);
+                        activities.add(activity);
+                    } else {
+                        int activityInd = activities.indexOf(activity);
+                        activity = activities.get(activityInd);
+                    }
+
+                    Class currentClass = new Class(null, activity.getId(), lessonNum, day);
+                    classesRepository.save(currentClass);
+                });
+            });
+        });
+    }
 }

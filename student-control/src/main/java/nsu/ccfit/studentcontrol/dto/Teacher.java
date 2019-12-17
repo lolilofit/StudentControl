@@ -1,9 +1,6 @@
 package nsu.ccfit.studentcontrol.dto;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,7 +17,8 @@ public class Teacher implements Serializable {
     @Id
     @Column(name = "teach_id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final int id;
+    @EqualsAndHashCode.Exclude
+    private final Integer id;
 
     @NotNull
     @Pattern(regexp = "^[А-Яа-я]([А-Яа-я]| |\\.)*$", message = "Name must only contain words and dots")

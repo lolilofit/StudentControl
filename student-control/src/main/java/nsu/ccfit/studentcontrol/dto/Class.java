@@ -22,7 +22,7 @@ public class Class implements Serializable {
 
     @Id
     @Column(name = "id", unique = true)
-    private final int id;
+    private final Integer id;
 
     @Column(name = "activity_id", nullable = false)
     @NotNull(message = "Activity id must be specified")

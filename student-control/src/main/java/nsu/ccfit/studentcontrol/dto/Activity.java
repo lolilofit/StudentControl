@@ -1,9 +1,6 @@
 package nsu.ccfit.studentcontrol.dto;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -17,7 +14,8 @@ import java.io.Serializable;
 public class Activity implements Serializable {
     @Id
     @Column(name = "activity_id", unique = true)
-    private final int id;
+    @EqualsAndHashCode.Exclude
+    private final Integer id;
 
     @Column(name = "teacher_id", nullable = false)
     @NotNull(message = "Teacher id must be specified")
@@ -31,6 +29,6 @@ public class Activity implements Serializable {
 
     @Column(name = "group_id", nullable = false)
     @NotNull(message = "Group id must be specified")
-    @JoinColumn(name = "group_id", referencedColumnName = "id", table = "groups")
-    private final int groupId;
+    @JoinColumn(name = "group_id", referencedColumnName = "num", table = "groups")
+    private final String groupId;
 }

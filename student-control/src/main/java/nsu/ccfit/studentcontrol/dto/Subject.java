@@ -1,9 +1,6 @@
 package nsu.ccfit.studentcontrol.dto;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -19,7 +16,8 @@ public class Subject implements Serializable {
     @Id
     @Column(name = "subj_id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final int id;
+    @EqualsAndHashCode.Exclude
+    private final Integer id;
 
     @NotNull(message = "Name must be specified")
     @Size(min = 1, max = 30, message = "Name of the subject must consist from 1 to 30 characters")
