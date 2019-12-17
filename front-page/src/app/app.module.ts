@@ -10,6 +10,8 @@ import { GroupContainerComponent } from './components/group-container/group-cont
 import {AttendanceService} from './services/attendance.service';
 import { AttendanceContainerComponent } from './components/attendance-container/attendance-container.component';
 import { AttendanceComponent } from './components/attendance/attendance.component';
+import { RouterModule } from '@angular/router';
+import { routing } from './app.routes';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { AttendanceComponent } from './components/attendance/attendance.componen
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule,
+    routing
   ],
   providers: [StudentsService, AttendanceService],
   bootstrap: [AppComponent]
