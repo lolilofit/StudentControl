@@ -27,7 +27,7 @@ public class GroupRestController {
     }
 
     @GetMapping(path = "/{id}/")
-    public ResponseEntity<Group> getGroup(@PathVariable(name = "id") int id) {
+    public ResponseEntity<Group> getGroup(@PathVariable(name = "id") String id) {
         Optional<Group> maybeGroup = repository.findById(id);
         return maybeGroup.map(group -> new ResponseEntity<>(group, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }

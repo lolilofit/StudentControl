@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,7 +58,7 @@ public class StudentRestController {
         Activity currentActivity = activityRepository.findById(id).orElse(null);
         if (currentActivity == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        int groupId = currentActivity.getGroupId();
+        String groupId = currentActivity.getGroupId();
         Group currentGroup = groupRepository.findById(groupId).orElse(null);
         if (currentGroup == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

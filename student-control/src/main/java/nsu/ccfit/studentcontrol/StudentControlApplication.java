@@ -1,26 +1,26 @@
 package nsu.ccfit.studentcontrol;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import nsu.ccfit.studentcontrol.data_getter.StudentsDataCatcher;
+import nsu.ccfit.studentcontrol.dto.Class;
+import nsu.ccfit.studentcontrol.dto.TimetableScriptAdapter;
+import nsu.ccfit.studentcontrol.python.data.PythonDataCatcher;
 import nsu.ccfit.studentcontrol.dto.Student;
-import org.python.core.Options;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import javax.script.*;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.InputStreamReader;
-import java.io.StringWriter;
 import java.util.List;
+import java.util.Map;
 
 @SpringBootApplication
 public class StudentControlApplication {
 
 	public static void main(String[] args) {
-		StudentsDataCatcher studentsDataCatcher = new StudentsDataCatcher(new ObjectMapper());
-		List<Student> studList = studentsDataCatcher.callPython();
+		PythonDataCatcher pythonDataCatcher = new PythonDataCatcher(new ObjectMapper());
+		List<Student> studList = pythonDataCatcher.callStudentPars();
 		System.out.println(studList);
+		System.out.println("------------------------------------");
+		Map<String, Map<Class.Days, Map<Integer, TimetableScriptAdapter>>> timetable = pythonDataCatcher.callTablePars();
+		System.out.println(timetable);
 
 		SpringApplication.run(StudentControlApplication.class, args);
 	}
