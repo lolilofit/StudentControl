@@ -1,5 +1,6 @@
 package nsu.ccfit.studentcontrol.dto;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,11 @@ import java.sql.Time;
 @Table(name = "timetable", schema = "C##OOAD")
 public class Class implements Serializable {
     public enum Days {
-        SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+        SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY;
+        @JsonValue
+        public int toValue() {
+            return ordinal();
+        }
     }
 
     @Id
