@@ -14,6 +14,7 @@ import java.io.Serializable;
 public class Activity implements Serializable {
     @Id
     @Column(name = "activity_id", unique = true)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @EqualsAndHashCode.Exclude
     private final Integer id;
 

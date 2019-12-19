@@ -2,6 +2,7 @@ package nsu.ccfit.studentcontrol.controllers;
 
 import nsu.ccfit.studentcontrol.dto.*;
 import nsu.ccfit.studentcontrol.dto.Class;
+import nsu.ccfit.studentcontrol.python.data.PythonDataCatcher;
 import nsu.ccfit.studentcontrol.repos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,20 +22,23 @@ public class DataRestController {
     private final TeacherRepository teacherRepository;
     private final ActivityRepository activityRepository;
     private final ClassesRepository classesRepository;
+    private final PythonDataCatcher pythonDataCatcher;
 
     @Autowired
-    public DataRestController(StudentRepository studentRepository, GroupRepository groupRepository, SubjectsRepository subjectsRepository, TeacherRepository teacherRepository, ActivityRepository activityRepository, ClassesRepository classesRepository) {
+    public DataRestController(StudentRepository studentRepository, GroupRepository groupRepository, SubjectsRepository subjectsRepository, TeacherRepository teacherRepository, ActivityRepository activityRepository, ClassesRepository classesRepository, PythonDataCatcher pythonDataCatcher) {
         this.studentRepository = studentRepository;
         this.groupRepository = groupRepository;
         this.subjectsRepository = subjectsRepository;
         this.teacherRepository = teacherRepository;
         this.activityRepository = activityRepository;
         this.classesRepository = classesRepository;
+        this.pythonDataCatcher = pythonDataCatcher;
     }
 
     @Transactional
-    @PostMapping(path = "/students")
-    public void postStudents(@RequestBody @Valid List<Student> students) {
+    @PostMapping(path = "/students", consumes = "application/json")
+    public void postStudents(/*@RequestBody @Valid List<Student> students*/) {
+        List<Student> students = pythonDataCatcher.callStudentPars();
         List<Group> groups = groupRepository.findAll();
         for (Student student: students) {
             if (!groups.contains(new Group(student.getGroup()))) {
@@ -46,8 +50,9 @@ public class DataRestController {
     }
 
     @Transactional
-    @PostMapping(path = "/timetable")
-    public void postTimetable(@RequestBody @Valid Map<String, Map<Class.Days, Map<Integer, TimetableScriptAdapter>>> data) {
+    @PostMapping(path = "/timetable", consumes = "application/json")
+    public void postTimetable(/*@RequestBody @Valid Map<String, Map<Class.Days, Map<Integer, TimetableScriptAdapter>>> data*/) {
+        Map<String, Map<Class.Days, Map<Integer, TimetableScriptAdapter>>> data = pythonDataCatcher.callTablePars();
         List<Subject> subjects = subjectsRepository.findAll();
         List<Teacher> teachers = teacherRepository.findAll();
         List<Group> groups = groupRepository.findAll();
@@ -80,6 +85,7 @@ public class DataRestController {
 
                     Teacher teacher = new Teacher(null, timetableScriptAdapter.getTeacher());
                     if (!teachers.contains(teacher)) {
+                        System.out.println("SAVING: " + teacher);
                         teacher = teacherRepository.save(teacher);
                         teachers.add(teacher);
                     } else {

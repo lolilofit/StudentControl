@@ -21,7 +21,7 @@ public class Teacher implements Serializable {
     private final Integer id;
 
     @NotNull
-    @Pattern(regexp = "^[А-Яа-я]([А-Яа-я]| |\\.)*$", message = "Name must only contain words and dots")
+    @Pattern(regexp = "^[А-Яа-яё]([А-Яа-яё]| |\\.)*$", message = "Name must only contain words and dots")
     @Size(min = 1, max = 50, message = "Teacher name must contain from 1 to 50 characters")
     private final String name;
 }

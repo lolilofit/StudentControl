@@ -29,8 +29,8 @@ public class PythonDataCatcher {
         return callPythonWindows("python src/main/python/students_pars.py", "CP1251", new TypeReference<List<Student>>() {});
     }
 
-    public Map<String, Map<Class.Days, Map<Integer, TimetableScriptAdapter>>> callTablePars(int tableIdParam) {
-        return callPythonWindows("python src/main/python/table.py " + tableIdParam, "CP1251", new TypeReference<Map<String, Map<Class.Days, Map<Integer, TimetableScriptAdapter>>>>() {});
+    public Map<String, Map<Class.Days, Map<Integer, TimetableScriptAdapter>>> callTablePars() {
+        return callPythonWindows("python src/main/python/table.py", "CP1251", new TypeReference<Map<String, Map<Class.Days, Map<Integer, TimetableScriptAdapter>>>>() {});
     }
 
     private<T> T callPythonWindows(String command, String charsetName, TypeReference<T> classReference) {

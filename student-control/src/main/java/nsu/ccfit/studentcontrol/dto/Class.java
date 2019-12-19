@@ -27,6 +27,7 @@ public class Class implements Serializable {
 
     @Id
     @Column(name = "id", unique = true)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private final Integer id;
 
     @Column(name = "activity_id", nullable = false)
