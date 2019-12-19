@@ -1,5 +1,7 @@
 package nsu.ccfit.studentcontrol.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +19,12 @@ import java.io.Serializable;
 @IdClass(AttendanceKey.class)
 public class Attendance implements Serializable {
     public enum Status {
-        ABSENT, PRESENT
+        ABSENT, PRESENT;
+
+        @JsonValue
+        public boolean toValue() {
+            return this == PRESENT;
+        }
     }
 
     @Id
