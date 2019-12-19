@@ -9,7 +9,7 @@ const url = 'http://localhost:8080/api/group/';
 
 export interface Group {
   id: number;
-  groupNum: number;
+  groupNum: string;
   groupStudents: Array<Student>;
 }
 
