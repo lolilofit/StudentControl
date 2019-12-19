@@ -1,10 +1,12 @@
 package nsu.ccfit.studentcontrol;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import nsu.ccfit.studentcontrol.data_getter.CallScrypt;
 import nsu.ccfit.studentcontrol.dto.Class;
+import nsu.ccfit.studentcontrol.dto.Student;
 import nsu.ccfit.studentcontrol.dto.TimetableScriptAdapter;
 import nsu.ccfit.studentcontrol.python.data.PythonDataCatcher;
-import nsu.ccfit.studentcontrol.dto.Student;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
