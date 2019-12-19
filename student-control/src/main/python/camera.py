@@ -20,10 +20,10 @@ class Student:
         self.id = id
         
 class Attendance:
-    def __init__(self, table_id, student_id, is_present):
-        self.table_id = table_id
-        self.student_id = student_id
-        self.is_present = is_present
+    def __init__(self, studid, lessonid, status):
+        self.studid = studid
+        self.lessonid = lessonid
+        self.status = status
 
 present_students = []
    
@@ -111,14 +111,16 @@ def main():
     for student in students:
         if(find_in_list(present_students, student.id) == True) :
             att = Attendance(table_id, student.id, True)
-            result_attendance.append(json.dumps(att.__dict__, ensure_ascii=False))
+            result_attendance.append(att)
+            #result_attendance.append(json.dumps(att.__dict__, ensure_ascii=False))
         else :
             att = Attendance(table_id, student.id, False)
-            result_attendance.append(json.dumps(att.__dict__, ensure_ascii=False))
+            result_attendance.append(att)
+            #result_attendance.append(json.dumps(att.__dict__, ensure_ascii=False))
     
-    students_info = json.dumps(result_attendance, ensure_ascii=False).replace('"{', '{').replace('}"', '}').replace('\\', '')
-    print(students_info)
-    #requests.post()
+    #students_info = json.dumps(result_attendance, ensure_ascii=False).replace('"{', '{').replace('}"', '}').replace('\\', '')
+    print(result_attendance)
+    requests.post('http://localhost:8080/api/attendance/all', result_attendance)
     
     
 if __name__ == '__main__':
