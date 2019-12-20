@@ -1,6 +1,5 @@
 package nsu.ccfit.studentcontrol.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -33,11 +32,19 @@ public class Attendance implements Serializable {
     @JoinColumn(name = "stud_id", referencedColumnName = "stud_id", table = "students")
     private final int studId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "stud_id", referencedColumnName = "stud_id", table = "students")
+    private Student student;
+
     @Id
     @Column(name = "lesson_id", nullable = false)
     @NotNull(message = "Lesson id must be specified")
     @JoinColumn(name = "lesson_id", referencedColumnName = "activity_id", table = "activity")
     private final int lessonId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lesson_id", referencedColumnName = "activity_id", table = "activity")
+    private Activity activity;
 
     @Column(name = "status", nullable = false)
     @NotNull(message = "Status must be specified")
