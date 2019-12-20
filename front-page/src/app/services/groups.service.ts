@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { UtilsService } from './utils.service';
 import { Student } from './students.service';
 
@@ -18,11 +16,9 @@ export interface Group {
 })
 export class GroupsService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private utils: UtilsService) { }
 
   load(): Observable<Array<Group>> {
-    return this.http.get<Array<Group>>(url, UtilsService.headers).pipe(
-      catchError(UtilsService.handleError)
-    );
+    return this.utils.getByUrl<Array<Group>>(url);
   }
 }

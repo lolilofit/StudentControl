@@ -1,14 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {UtilsService} from './utils.service';
-import {catchError} from 'rxjs/operators';
+import { UtilsService } from './utils.service';
+import { Student } from './students.service';
+import { Lesson } from './lessons.service';
 
 const url = 'http://localhost:8080/api/attendance/';
 
+export interface Activity {
+  subject: Lesson;
+}
+
 export interface Attendance {
   studId: number;
+  student: Student;
   lessonId: number;
-  status: string;
+  activity: Activity;
+  status: boolean;
 }
 
 @Injectable({
@@ -17,11 +23,9 @@ export interface Attendance {
 
 export class AttendanceService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private utils: UtilsService) { }
 
   loadByStudent(id: number) {
-    return this.http.get(url + 'student/' + id + '/', UtilsService.headers).pipe(
-      catchError(UtilsService.handleError)
-    );
+    return this.utils.getByUrl<Array<Attendance>>(url + 'student/' + id + '/');
   }
 }

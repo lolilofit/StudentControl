@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { UtilsService } from './utils.service';
 
 const url = 'http://localhost:8080/api/student/';
@@ -16,11 +14,12 @@ export interface Student {
   providedIn: 'root'
 })
 export class StudentsService {
-  constructor(private http: HttpClient) { }
+  constructor(private utils: UtilsService) { }
 
   load(): Observable<Array<Student>> {
-    return this.http.get<Array<Student>>(url, UtilsService.headers).pipe(
-      catchError(UtilsService.handleError)
-    );
+    return this.utils.getByUrl<Array<Student>>(url);
+  }
+  loadById(id: number): Observable<Student> {
+    return this.utils.getByUrl<Student>(url + id + '/');
   }
 }

@@ -1,0 +1,7 @@
+:host .positive {
+  color: green;
+}
+
+:host .negative {
+  color: red;
+}

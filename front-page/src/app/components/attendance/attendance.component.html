@@ -1,1 +1,5 @@
-<p>attendance works!</p>
+<div class="mdl-list__item">
+  <div class="mdl-list__item-primary-content">
+    {{attendance.activity.subject.name}} - <div [ngClass]="{positive: attendance.status, negative: !attendance.status}">{{statusString}}</div>
+  </div>
+</div>
