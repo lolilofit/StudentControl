@@ -42,7 +42,7 @@ public class Attendance implements Serializable {
     @JoinColumn(name = "lesson_id", referencedColumnName = "activity_id", table = "activity")
     private final int lessonId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "lesson_id", insertable = false, updatable = false)
     private Activity activity;
 
