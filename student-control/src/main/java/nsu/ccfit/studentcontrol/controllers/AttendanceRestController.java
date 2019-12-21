@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -26,8 +27,9 @@ public class AttendanceRestController {
     }
 
     @PostMapping(path = "/all", consumes = "application/json")
-    public void postReport(@RequestBody @Valid List<Attendance> attendances) {
-        attendanceRepository.saveAll(attendances);
+    public void postReport(@RequestBody @Valid Attendance[] attendances) {
+        List<Attendance> nextAttendances = Arrays.asList(attendances);
+        attendanceRepository.saveAll(nextAttendances);
     }
 
     @GetMapping(path = "/student/{id}/")

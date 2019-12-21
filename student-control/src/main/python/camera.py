@@ -7,11 +7,10 @@ Created on Tue Nov 12 13:33:09 2019
 
 import cv2 as cv
 import face_recognition
-import os
-import sys
 import requests
 import json
-import atexit
+import http.client as http_client
+import logging
 
 class Student:
     def __init__(self, id, name, group):
@@ -41,8 +40,8 @@ def find_id(lst, find_him) :
 
 
 def main():
-    table_id = 0
-    students = [Student(0, 'Такого нет', '17206'), Student(1, 'Усова Дарья Сергеевна', '17206'), Student(2, 'Зулин Даниил Константинович', '17206')]
+    table_id = 2
+    students = [Student(0, 'Такого нет', '17206'), Student(66, 'Усова Дарья Сергеевна', '17206'), Student(62, 'Зулин Даниил Константинович', '17206')]
     '''
     table_id = sys.argv[1]
     resp = requests.get('http://localhost:8080/api/student/activity/' + table_id);
@@ -106,22 +105,28 @@ def main():
         
     capture.release()
     cv.destroyAllWindows()
-    #print(present_students)
+    print(present_students)
+    
     result_attendance = []
     for student in students:
         if(find_in_list(present_students, student.id) == True) :
-            att = Attendance(table_id, student.id, True)
-            result_attendance.append(att)
+            att = Attendance(student.id, table_id, True)
+            result_attendance.append({'studid' : student.id, 'lessonid' : table_id, 'status' : 1})
             #result_attendance.append(json.dumps(att.__dict__, ensure_ascii=False))
         else :
-            att = Attendance(table_id, student.id, False)
-            result_attendance.append(att)
+            att = Attendance(student.id, table_id, False)
+            result_attendance.append({'studid' : student.id, 'lessonid' : table_id, 'status' : 0})
+            #result_attendance.append(att)
             #result_attendance.append(json.dumps(att.__dict__, ensure_ascii=False))
     
     #students_info = json.dumps(result_attendance, ensure_ascii=False).replace('"{', '{').replace('}"', '}').replace('\\', '')
-    print(result_attendance)
-    requests.post('http://localhost:8080/api/attendance/all', result_attendance)
+        
+    print('------')
+    #print(students_info)
     
+    r = requests.session()
+    r = requests.post('http://localhost:8080/api/attendance/all', json=result_attendance)
+    print(r.text)
     
 if __name__ == '__main__':
     main()
