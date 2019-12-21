@@ -43,9 +43,10 @@ public class DataRestController {
         List<Student> students = pythonDataCatcher.callStudentPars();
         List<Group> groups = groupRepository.findAll();
         for (Student student: students) {
+            System.out.println("ADDING: " + student);
             if (!groups.contains(new Group(student.getGroup()))) {
-                groupRepository.save(new Group(student.getGroup()));
-                groups.add(new Group(student.getGroup()));
+                Group group = groupRepository.save(new Group(student.getGroup()));
+                groups.add(group);
             }
             studentRepository.save(student);
         }
@@ -58,13 +59,16 @@ public class DataRestController {
         List<Subject> subjects = subjectsRepository.findAll();
         List<Teacher> teachers = teacherRepository.findAll();
         List<Group> groups = groupRepository.findAll();
+        System.out.println("INIT GROUPS: " + groups);
         List<Activity> activities = activityRepository.findAll();
 
         data.forEach((groupNum, groupTable) -> {
+            System.out.println("ADDING: " + groupNum + ":" + groupTable);
             Group group = new Group(groupNum);
             if (!groups.contains(group)) {
                 group = groupRepository.save(new Group(groupNum));
                 groups.add(group);
+                System.out.println(group + " ADDED");
             } else {
                 int groupInd = groups.indexOf(group);
                 group = groups.get(groupInd);
@@ -93,6 +97,7 @@ public class DataRestController {
                     } else {
                         int teacherInd = teachers.indexOf(teacher);
                         teacher = teachers.get(teacherInd);
+                        System.out.println("GOT FROM LIST: " + teacher);
                     }
 
                     Activity activity = new Activity(null, teacher.getId(), subject.getId(), finalGroup.getGroupNum());

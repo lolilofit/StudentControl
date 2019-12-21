@@ -24,7 +24,7 @@ public class Activity implements Serializable {
     private final int teacherId;
 
     @ManyToOne
-    @JoinColumn(name = "teacher_id", referencedColumnName = "teach_id", table = "teachers")
+    @JoinColumn(name = "teacher_id", insertable = false, updatable = false)
     private Teacher teacher;
 
     @Column(name = "subject_id", nullable = false)
@@ -33,7 +33,7 @@ public class Activity implements Serializable {
     private final int subjectId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subject_id", referencedColumnName = "subj_id", table = "subjects")
+    @JoinColumn(name = "subject_id", insertable = false, updatable = false)
     private Subject subject;
 
     @Column(name = "group_id", nullable = false)

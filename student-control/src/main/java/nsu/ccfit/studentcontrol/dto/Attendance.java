@@ -33,7 +33,7 @@ public class Attendance implements Serializable {
     private final int studId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "stud_id", referencedColumnName = "stud_id", table = "students")
+    @JoinColumn(name = "stud_id", insertable = false, updatable = false)
     private Student student;
 
     @Id
@@ -43,7 +43,7 @@ public class Attendance implements Serializable {
     private final int lessonId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "lesson_id", referencedColumnName = "activity_id", table = "activity")
+    @JoinColumn(name = "lesson_id", insertable = false, updatable = false)
     private Activity activity;
 
     @Column(name = "status", nullable = false)

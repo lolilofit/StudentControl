@@ -54,6 +54,7 @@ def pars_group(group_name, text):
     }
     
     soup = BeautifulSoup(text, 'html.parser')
+    
     table = soup.find('table', class_='time-table')
     lines = table.find_all('tr')
     current_week = soup.find('div', class_='container-header').find('div', class_='parity').text
@@ -67,6 +68,7 @@ def pars_group(group_name, text):
         for part_time in subjects[1:] : 
             cell = part_time.find_all('div', class_='cell')
             for one_pair in cell:
+    
                 subject = one_pair.find('div', class_='subject')
                 room = one_pair.find('div', class_='room')
                 teacher = one_pair.find('a', class_='tutor')
@@ -108,7 +110,9 @@ def pars_group(group_name, text):
 
 def get_group_urls_pars(base, facultet, text):
     soup = BeautifulSoup(text, 'html.parser')
-    groups = soup.find('table', class_='degree_groups').find_all('tr')
+    groups_tab = soup.find(id='w0-tab1').find('table', class_='degree_groups')
+
+    groups = groups_tab.find_all('tr')
    
     for line in groups:
         l = line.find_all('td')
@@ -119,7 +123,6 @@ def get_group_urls_pars(base, facultet, text):
             pars_group(name, get_html(url))
     ser_list = json.dumps(facultet_timetable, ensure_ascii=False).replace('"{', '{').replace('}"', '}').replace('\\', '')
     print(ser_list)
-            
         
 
 def get_facultets_urls(base, text):
