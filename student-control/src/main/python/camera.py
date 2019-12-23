@@ -9,20 +9,25 @@ import cv2 as cv
 import face_recognition
 import requests
 import json
-import http.client as http_client
-import logging
+import datetime
 
-class Student:
+class Student(object):
+    def __init__(self, j):
+        self.__dict__ = json.loads(j)
+        
+    ''''
     def __init__(self, id, name, group):
+        self.id = id
         self.name = name
         self.group = group
-        self.id = id
-        
+    '''
+    
 class Attendance:
-    def __init__(self, studid, lessonid, status):
+    def __init__(self, studid, lessonid, status, datetime):
         self.studid = studid
         self.lessonid = lessonid
         self.status = status
+        self.datetime = datetime
 
 present_students = []
    
@@ -40,17 +45,16 @@ def find_id(lst, find_him) :
 
 
 def main():
-    table_id = 2
-    students = [Student(0, 'Такого нет', '17206'), Student(66, 'Усова Дарья Сергеевна', '17206'), Student(62, 'Зулин Даниил Константинович', '17206')]
-    '''
-    table_id = sys.argv[1]
-    resp = requests.get('http://localhost:8080/api/student/activity/' + table_id);
+    table_id = 2110
+   
+    #table_id = sys.argv[1]
+    resp = requests.get('http://localhost:8080/api/student/activity/' + str(table_id));
     if resp.status_code != 200 : 
         return
-    students = json.loads(resp.content)
-    print('stud to find')
-    print(students)
-    '''
+    list_s = json.loads(resp.content)
+    students = []
+    for string_st in list_s :
+        students.append(Student(json.dumps(string_st)))
     
     capture = cv.VideoCapture(0)
     cv.namedWindow("capture")
@@ -64,6 +68,7 @@ def main():
     
     for student in students :
         loaded = student
+        print(loaded.name)
         try :
             image = face_recognition.load_image_file("examples/" + loaded.name.replace(" ", "_") + ".jpg")
             face_encoding = face_recognition.face_encodings(image)[0]
@@ -110,19 +115,12 @@ def main():
     result_attendance = []
     for student in students:
         if(find_in_list(present_students, student.id) == True) :
-            att = Attendance(student.id, table_id, True)
-            result_attendance.append({'studid' : student.id, 'lessonid' : table_id, 'status' : 1})
-            #result_attendance.append(json.dumps(att.__dict__, ensure_ascii=False))
+            result_attendance.append({'studId' : student.id, 'lessonId' : table_id, 'status' : 1, 'datetime' : str(datetime.datetime.now())})
         else :
-            att = Attendance(student.id, table_id, False)
-            result_attendance.append({'studid' : student.id, 'lessonid' : table_id, 'status' : 0})
-            #result_attendance.append(att)
-            #result_attendance.append(json.dumps(att.__dict__, ensure_ascii=False))
-    
-    #students_info = json.dumps(result_attendance, ensure_ascii=False).replace('"{', '{').replace('}"', '}').replace('\\', '')
-        
+            result_attendance.append({'studId' : student.id, 'lessonId' : table_id, 'status' : 0, 'datetime' : str(datetime.datetime.now())})
+         
     print('------')
-    #print(students_info)
+    print(result_attendance)
     
     r = requests.session()
     r = requests.post('http://localhost:8080/api/attendance/all', json=result_attendance)

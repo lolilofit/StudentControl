@@ -18,7 +18,7 @@ import java.util.List;
 @CrossOrigin("*")
 public class AttendanceRestController {
     private final StudentRepository studentRepository;
-    private final AttendanceRepository attendanceRepository;
+    private final AttendanceRepository  attendanceRepository;
 
     @Autowired
     public AttendanceRestController(StudentRepository studentRepository, AttendanceRepository attendanceRepository) {

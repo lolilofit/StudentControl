@@ -52,7 +52,7 @@ public class StudentRestController {
         return repository.save(student);
     }
 
-    @Transactional
+//    @Transactional
     @GetMapping(path = "/activity/{id}")
     public ResponseEntity<List<Student>> getStudentsByClass(@PathVariable(name = "id") int id) {
         Activity currentActivity = activityRepository.findById(id).orElse(null);

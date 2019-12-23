@@ -32,7 +32,7 @@ public class Attendance implements Serializable {
     @JoinColumn(name = "stud_id", referencedColumnName = "stud_id", table = "students")
     private final int studId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "stud_id", insertable = false, updatable = false)
     private Student student;
 
@@ -42,7 +42,7 @@ public class Attendance implements Serializable {
     @JoinColumn(name = "lesson_id", referencedColumnName = "activity_id", table = "activity")
     private final int lessonId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "lesson_id", insertable = false, updatable = false)
     private Activity activity;
 
@@ -50,4 +50,8 @@ public class Attendance implements Serializable {
     @NotNull(message = "Status must be specified")
     @Enumerated(EnumType.STRING)
     private final Status status;
+
+    @Column(name = "datetime", nullable = false)
+    @NotNull(message = "Date time must be not null")
+    private final String datetime;
 }

@@ -32,7 +32,7 @@ public class Activity implements Serializable {
     @JoinColumn(name = "subject_id", referencedColumnName = "subj_id", table = "subjects")
     private final int subjectId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "subject_id", insertable = false, updatable = false)
     private Subject subject;
 
