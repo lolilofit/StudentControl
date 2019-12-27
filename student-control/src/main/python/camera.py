@@ -10,6 +10,7 @@ import face_recognition
 import requests
 import json
 import datetime
+import time
 
 class Student(object):
     def __init__(self, j):
@@ -115,9 +116,9 @@ def main():
     result_attendance = []
     for student in students:
         if(find_in_list(present_students, student.id) == True) :
-            result_attendance.append({'studId' : student.id, 'lessonId' : table_id, 'status' : 1, 'datetime' : str(datetime.datetime.now())})
+            result_attendance.append({'studId' : student.id, 'lessonId' : table_id, 'status' : 1, 'datetime' : str(round(time.time() * 1000))})
         else :
-            result_attendance.append({'studId' : student.id, 'lessonId' : table_id, 'status' : 0, 'datetime' : str(datetime.datetime.now())})
+            result_attendance.append({'studId' : student.id, 'lessonId' : table_id, 'status' : 0, 'datetime' : str(round(time.time() * 1000))})
          
     print('------')
     print(result_attendance)

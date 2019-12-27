@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 @Data
 @RequiredArgsConstructor
@@ -53,5 +54,5 @@ public class Attendance implements Serializable {
 
     @Column(name = "datetime", nullable = false)
     @NotNull(message = "Date time must be not null")
-    private final String datetime;
+    private final Timestamp datetime;
 }
