@@ -12,6 +12,11 @@ import { AttendanceContainerComponent } from './components/attendance-container/
 import { AttendanceComponent } from './components/attendance/attendance.component';
 import { RouterModule } from '@angular/router';
 import { routing } from './app.routes';
+import {StudentSelectComponent} from './components/student-select/student-select.component';
+import {GroupsService} from './services/groups.service';
+import { TeacherContainerComponent } from './components/teacher-container/teacher-container.component';
+import { TeacherComponent } from './components/teacher/teacher.component';
+import { TeacherSelectComponent } from './components/teacher-select/teacher-select.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +25,11 @@ import { routing } from './app.routes';
     GroupComponent,
     GroupContainerComponent,
     AttendanceContainerComponent,
-    AttendanceComponent
+    AttendanceComponent,
+    StudentSelectComponent,
+    TeacherContainerComponent,
+    TeacherComponent,
+    TeacherSelectComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +37,7 @@ import { routing } from './app.routes';
     RouterModule,
     routing
   ],
-  providers: [StudentsService, AttendanceService],
+  providers: [StudentsService, AttendanceService, GroupsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,11 +1,5 @@
-<div *ngIf="!(initAttendances || initStudent)" style="text-align:center; font-size: 20pt">
-  Loading...
-</div>
-<div *ngIf="initAttendances && initStudent">
-  <h1>Посещаения студента: {{initStudent.name}}</h1>
-  <div class="mdl-list">
-    <div *ngFor="let attendance of attendances">
-     <app-attendance [attendance]="attendance"></app-attendance>
-    </div>
+<div class="mdl-list">
+  <div *ngFor="let attendance of attendances">
+    <app-attendance [attendance]="attendance"></app-attendance>
   </div>
 </div>

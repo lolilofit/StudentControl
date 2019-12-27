@@ -15,13 +15,13 @@ import java.util.Map;
 public class StudentControlApplication {
 
 	public static void main(String[] args) {
-		PythonDataCatcher pythonDataCatcher = new PythonDataCatcher(new ObjectMapper());
+		/*PythonDataCatcher pythonDataCatcher = new PythonDataCatcher(new ObjectMapper());
 		List<Student> studList = pythonDataCatcher.callStudentPars();
 		System.out.println(studList);
 		System.out.println("------------------------------------");
 		Map<String, Map<Class.Days, Map<Integer, TimetableScriptAdapter>>> timetable = pythonDataCatcher.callTablePars();
 		System.out.println(timetable);
-
+*/
 		SpringApplication.run(StudentControlApplication.class, args);
 	}
 }

@@ -15,6 +15,7 @@ export interface Attendance {
   lessonId: number;
   activity: Activity;
   status: boolean;
+  datetime: string;
 }
 
 @Injectable({
@@ -27,5 +28,9 @@ export class AttendanceService {
 
   loadByStudent(id: number) {
     return this.utils.getByUrl<Array<Attendance>>(url + 'student/' + id + '/');
+  }
+
+  loadByTeacher(id: number) {
+    return this.utils.getByUrl<Array<Attendance>>(url + 'teacher/' + id + '/');
   }
 }

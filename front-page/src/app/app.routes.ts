@@ -1,7 +1,9 @@
 import { Routes, RouterModule } from '@angular/router';
 import { GroupContainerComponent } from './components/group-container/group-container.component';
-import { AttendanceContainerComponent } from './components/attendance-container/attendance-container.component';
 import { ModuleWithProviders } from '@angular/core';
+import {StudentSelectComponent} from './components/student-select/student-select.component';
+import {TeacherContainerComponent} from './components/teacher-container/teacher-container.component';
+import {TeacherSelectComponent} from './components/teacher-select/teacher-select.component';
 
 const routes: Routes = [
   {
@@ -10,9 +12,19 @@ const routes: Routes = [
     component: GroupContainerComponent
   },
   {
-    path: 'attendance/:id',
+    path: 'teachers',
     pathMatch: 'full',
-    component: AttendanceContainerComponent
+    component: TeacherContainerComponent
+  },
+  {
+    path: 'attendance/student/:id',
+    pathMatch: 'full',
+    component: StudentSelectComponent
+  },
+  {
+    path: 'attendance/teacher/:id',
+    pathMatch: 'full',
+    component: TeacherSelectComponent
   },
   {
     path: '',

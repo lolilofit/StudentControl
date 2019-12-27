@@ -1,5 +1,5 @@
 <div class="mdl-list__item">
   <div class="mdl-list__item-primary-content">
-    {{attendance.activity.subject.name}} - <div [ngClass]="{positive: attendance.status, negative: !attendance.status}">{{statusString}}</div>
+    {{attendance.student.name}} - {{attendance.student.group}} - {{attendance.activity.subject.name}} - <span [ngClass]="{positive: attendance.status, negative: !attendance.status}">{{statusString}}</span> - {{attendance.datetime}}
   </div>
 </div>

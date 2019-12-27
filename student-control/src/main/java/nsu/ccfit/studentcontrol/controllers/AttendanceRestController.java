@@ -39,4 +39,12 @@ public class AttendanceRestController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(student.getAttendanceList(), HttpStatus.OK);
     }
+
+    @GetMapping(path = "/teacher/{id}/")
+    public ResponseEntity<List<Attendance>> teacherAttendance(@PathVariable(name = "id") int id) {
+        List<Attendance> attendanceByTeacher = attendanceRepository.findAttendanceByTeacher(id);
+        if (attendanceByTeacher == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(attendanceByTeacher, HttpStatus.OK);
+    }
 }
