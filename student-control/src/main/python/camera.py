@@ -46,7 +46,7 @@ def find_id(lst, find_him) :
 
 
 def main():
-    table_id = 2110
+    table_id = 918
    
     #table_id = sys.argv[1]
     resp = requests.get('http://localhost:8080/api/student/activity/' + str(table_id));

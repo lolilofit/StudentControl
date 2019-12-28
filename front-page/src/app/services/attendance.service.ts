@@ -15,7 +15,7 @@ export interface Attendance {
   lessonId: number;
   activity: Activity;
   status: boolean;
-  datetime: string;
+  datetime: Date;
 }
 
 @Injectable({
