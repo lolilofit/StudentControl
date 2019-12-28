@@ -1,11 +1,4 @@
-<ul class='mdl-list' style="width: 20%;">
-  <li class="mdl-list__item mdl-shadow--2dp">
-    <span class="mdl-list__item-primary-content">Зулин Даниил Константинович</span>
-  </li>
-  <li class="mdl-list__item mdl-shadow--2dp">
-    <span class="mdl-list__item-primary-content">Усова Дарья Сергеевна</span>
-  </li>
-  <li class="mdl-list__item mdl-shadow--2dp">
-    <span class="mdl-list__item-primary-content"></span>
-  </li>
-</ul>
+<div class="mdl-list__item mdl-shadow--2dp">
+  <span class="mdl-list__item-primary-content">{{student.name}} </span>
+  <a [routerLink]="['/attendance/student', student.id]" routerLinkActive="active">Посещаемость</a>
+</div>

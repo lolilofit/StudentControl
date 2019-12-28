@@ -1,0 +1,8 @@
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--12-col" *ngIf="!initTeachers" style="text-align:center; font-size: 20pt">
+    Loading...
+  </div>
+  <div class="mdl-cell mdl-cell--3-col-desktop" *ngFor="let teacher of teachers">
+    <app-teacher [teacher]="teacher"></app-teacher>
+  </div>
+</div>

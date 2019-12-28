@@ -1,1 +1,6 @@
-
+<strong>Группа {{group.groupNum}}</strong>
+<br>
+<strong *ngIf="group.groupStudents.length == 0">Студентов нет :(</strong>
+<ul class='mdl-list'>
+  <app-student *ngFor="let stud of group.groupStudents" [student]="stud"></app-student>
+</ul>

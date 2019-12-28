@@ -1,9 +1,6 @@
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--12-col" *ngIf="!intGroups" style="text-align:center; font-size: 20pt">
     Loading...
-<!--    <br>-->
-<!--    <br>-->
-<!--    <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>-->
   </div>
   <div class="mdl-cell mdl-cell--3-col-desktop" *ngFor="let group of groups">
     <app-group [group]="group"></app-group>

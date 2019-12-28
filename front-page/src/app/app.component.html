@@ -1,20 +1,20 @@
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
-      <span class="mdl-layout-title"><a class="mdl-navigation__link" href="/">Учет успеваемости</a></span>
+      <span class="mdl-layout-title"><a class="mdl-navigation__link" routerLink="/" routerLinkActive="active">Учет посещаемости</a></span>
     </div>
   </header>
   <div class="mdl-layout__drawer">
-    <span class = "mdl-layout-title">Учет успеваемости</span>
+    <span class = "mdl-layout-title">Учет посещаемости</span>
     <br>
     <nav class="mdl-navigation">
-      <a class="mdl-navigation__link">Студенты</a>
-      <a class="mdl-navigation__link">Преподаватели</a>
+      <a class="mdl-navigation__link" routerLink="/groups" routerLinkActive="active">Студенты</a>
+      <a class="mdl-navigation__link" routerLink="/teachers" routerLinkActive="active">Преподаватели</a>
       <a class="mdl-navigation__link">Занятия</a>
       <a class="mdl-navigation__link">Расписание</a>
     </nav>
   </div>
   <main class="mdl-layout__content" style="padding: 20px;">
-    <app-group-container></app-group-container>
+    <router-outlet></router-outlet>
   </main>
 </div>

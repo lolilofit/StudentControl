@@ -1,0 +1,7 @@
+<div *ngIf="!(initAttendances || initStudent)" style="text-align:center; font-size: 20pt">
+  Loading...
+</div>
+<div *ngIf="initAttendances && initStudent">
+  <h5>Посещения студента: {{initStudent.name}}</h5>
+  <app-attendance-container [attendanceList]="attendances"></app-attendance-container>
+</div>

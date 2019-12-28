@@ -1,24 +1,32 @@
 import { Injectable } from '@angular/core';
-import {HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {throwError} from 'rxjs';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
-  public static headers: { headers: HttpHeaders } = { headers: new HttpHeaders({Accept: 'application/json'})};
+  private headers: { headers: HttpHeaders } = { headers: new HttpHeaders({Accept: 'application/json'})};
 
-  public static handleError(error: HttpErrorResponse) {
+  public handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);
     } else {
       console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+        `Backend returned code ${error.statusText}, ` +
+        `Backend returned number ${error.status}, ` +
+        `body was: ${error.error} `);
     }
     return throwError(
       'Something bad happened; please try again later.');
   }
 
-  constructor() { }
+  public getByUrl<T>(url: string): Observable<T> {
+    return this.http.get<T>(url, this.headers).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  constructor(private http: HttpClient) { }
 }
