@@ -6,6 +6,7 @@ The main goal of our project is to help teachers to keep track of students atten
 
 
 
+
 **Before launch you should install this:**
 
 *Python 3.7 (https://www.anaconda.com/distribution/)*
